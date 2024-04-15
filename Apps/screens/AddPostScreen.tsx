@@ -17,10 +17,12 @@ import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useUser } from "@clerk/clerk-expo";
 
 const AddPostScreen = () => {
   const [image, setImage] = useState<string | null>(null);
   const [categoryList, setCategoryList] = useState<any[]>([]);
+  const { user } = useUser();
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +32,9 @@ const AddPostScreen = () => {
       address: "",
       image: "",
       price: "",
+      userName: "",
+      userImage: "",
+      userEmail: "",
     },
     // validate: (value) => {
     //   const errors: any = {};
@@ -66,13 +71,20 @@ const AddPostScreen = () => {
       uploadBytes(imageRef, blobFile).then(async (snapshot) => {
         const downloadURL = await getDownloadURL(imageRef);
         values["image"] = downloadURL as string;
+        values["userName"] = user?.fullName as string;
+        values["userImage"] = user?.imageUrl as string;
+        values["userEmail"] = user?.primaryEmailAddress?.emailAddress as string;
         const docRef = await addDoc(collection(db, "UserPost"), values);
-        if (docRef.id)
+        if (docRef.id) {
+          resetForm();
+          setImage(null);
           ToastAndroid.show("Post Added Successfully", ToastAndroid.SHORT);
-        else ToastAndroid.show("Something went wrong", ToastAndroid.SHORT);
+        } else {
+          resetForm();
+          setImage(null);
+          ToastAndroid.show("Something went wrong", ToastAndroid.SHORT);
+        }
       });
-      resetForm();
-      setImage(null);
     },
   });
 
@@ -106,9 +118,10 @@ const AddPostScreen = () => {
   useEffect(() => {
     getCategoryList();
   }, []);
+
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
-      <View className="px-8 py-14">
+      <SafeAreaView className="px-8">
         <Text className="text-3xl font-bold">Add new post</Text>
         <Text className="text-lg text-gray-500">
           Create new post and start selling
@@ -187,7 +200,7 @@ const AddPostScreen = () => {
             <Text className="text-white text-[17px]">Submit</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };
