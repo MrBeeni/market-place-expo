@@ -35,6 +35,7 @@ const AddPostScreen = () => {
       userName: "",
       userImage: "",
       userEmail: "",
+      createdAt: "",
     },
     // validate: (value) => {
     //   const errors: any = {};
@@ -70,6 +71,7 @@ const AddPostScreen = () => {
       const imageRef = ref(storage, `communityPost/${Date.now()}.jpg`);
       uploadBytes(imageRef, blobFile).then(async (snapshot) => {
         const downloadURL = await getDownloadURL(imageRef);
+        values["createdAt"] = new Date().toISOString();
         values["image"] = downloadURL as string;
         values["userName"] = user?.fullName as string;
         values["userImage"] = user?.imageUrl as string;
