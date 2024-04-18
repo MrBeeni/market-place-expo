@@ -45,7 +45,7 @@ export default function App() {
   return (
     <ClerkProvider
       tokenCache={tokenCache}
-      publishableKey="pk_test_cHJvcGVyLW1pdGUtNzguY2xlcmsuYWNjb3VudHMuZGV2JA"
+      publishableKey="*************************************************"
     >
       <View className="flex-1 bg-white">
         <StatusBar style="auto" />
