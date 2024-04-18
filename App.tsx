@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { Button, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,7 +7,6 @@ import { ClerkProvider, SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigation from "./Apps/navigation/TabNavigation";
-import HomeScreen from "./Apps/screens/HomeScreen";
 
 export default function App() {
   const tokenCache = {

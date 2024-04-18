@@ -60,12 +60,12 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="bg-white h-full">
-      <ScrollView className="px-6">
+      <View className="px-6">
         <Header />
         <Slider sliderList={sliderList} />
         <Categories categoryList={categoryList} />
         <LatestItemList userPost={userPost} />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

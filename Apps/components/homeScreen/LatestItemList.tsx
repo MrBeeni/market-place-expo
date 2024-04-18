@@ -16,7 +16,7 @@ interface LatestItemListProps {
 
 const LatestItemList: FC<LatestItemListProps> = ({ userPost }) => {
   return (
-    <View className="mt-5">
+    <View className="mt-5 h-[270px]">
       <Text className="font-bold text-[20px]">Latest item</Text>
 
       <FlatList

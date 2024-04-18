@@ -1,11 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import AddPostScreen from "../screens/AddPostScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import HomeScreenStackNavigator from "./HomeScreenStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ const TabNavigation = () => {
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="home"
-        component={HomeScreen}
+        component={HomeScreenStackNavigator}
         options={{
           tabBarLabel: ({ color }) => (
             <Text style={{ color: color, paddingBottom: 3, fontSize: 14 }}>
