@@ -1,12 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ExploreScreen from "../screens/ExploreScreen";
 import AddPostScreen from "../screens/AddPostScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreenStackNavigator from "./HomeScreenStackNavigator";
 import ExploreScreenStackNavigator from "./ExploreScreenStackNavigator";
+import ProfileScreenStackNavigator from "./ProfileScreenStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,7 +66,7 @@ const TabNavigation = () => {
             <Ionicons name="person-circle" size={size} color={color} />
           ),
         }}
-        component={ProfileScreen}
+        component={ProfileScreenStackNavigator}
       />
     </Tab.Navigator>
   );
