@@ -7,7 +7,7 @@ interface CategoriesProps {
 }
 
 const Categories: FC<CategoriesProps> = ({ categoryList }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   return (
     <View className="mt-5">
       <Text className="font-bold text-[20px]">Categories</Text>
