@@ -1,11 +1,44 @@
-import { View, Text } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useUser } from "@clerk/clerk-expo";
+const diary = require("../../assets/image/diary.png");
+const search = require("../../assets/image/search.png");
+const link = require("../../assets/image/www.png");
+const logout = require("../../assets/image/logout.png");
 
 const ProfileScreen = () => {
+  const { user } = useUser();
+  const menuList = [
+    { id: "1", name: "My product", image: diary },
+    { id: "2", name: "Explore", image: search },
+    { id: "3", name: "Portfolio", image: link },
+    { id: "4", name: "Logout", image: logout },
+  ];
   return (
-    <View>
-      <Text>ProfileScreen</Text>
-    </View>
+    <SafeAreaView className="h-full w-full bg-white">
+      <View className="flex items-center">
+        <Image
+          className="w-[150px] h-[150px] rounded-full"
+          source={{ uri: user?.imageUrl }}
+        />
+        <Text className="font-bold text-[25px]">{user?.fullName}</Text>
+        <Text className="text-[18px] text-gray-500">
+          {user?.primaryEmailAddress?.emailAddress}
+        </Text>
+      </View>
+      <FlatList
+        className="mt-4"
+        data={menuList}
+        numColumns={3}
+        renderItem={({ item }) => (
+          <TouchableOpacity className=" flex-1 items-center p-5 border-[1px] mx-2 mt-4 rounded-lg border-blue-400 bg-blue-50">
+            <Image source={item.image} className="w-[60px] h-[60px]" />
+            <Text className="text-center mt-1">{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+    </SafeAreaView>
   );
 };
 
